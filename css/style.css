@@ -182,3 +182,11 @@ p.dim{color:var(--dim);font-size:.92rem;}
 @keyframes blink{50%{opacity:.2;}}
 .cctv .ts{position:absolute;bottom:.8rem;right:.8rem;}
 .cctv .cam{position:absolute;top:.8rem;right:.8rem;}
+
+/* ===== PC: 웹툰 컷을 중앙 세로 컬럼으로 고정 ===== */
+@media(min-width:768px){
+  .panel,.cctv{max-width:720px;margin-left:auto;margin-right:auto;border-left:1px solid var(--line);border-right:1px solid var(--line);}
+  .panel .title-ov{left:1.5rem;}
+  .panel .narr-line{left:1.5rem;right:1.5rem;}
+  .redact-box{left:1.5rem;right:1.5rem;}
+}
