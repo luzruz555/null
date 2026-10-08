@@ -190,3 +190,34 @@ p.dim{color:var(--dim);font-size:.92rem;}
   .panel .narr-line{left:1.5rem;right:1.5rem;}
   .redact-box{left:1.5rem;right:1.5rem;}
 }
+
+/* ===== CCTV / FX 이미지 효과 (흑백 · 노이즈 · 스캔라인 · 글리치) ===== */
+.cctv{filter:none;background:#000;}
+.cctv::after{display:none;}
+.cctv .ph{display:none;}
+.cctv.noimg .ph{display:flex;}
+.fx{position:relative;overflow:hidden;}
+.cctv img:not(.fxg),.fx img:not(.fxg){
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(1) contrast(1.25) brightness(.8);
+  animation:fxFlicker 3.2s infinite steps(1,end), fxShake var(--gd,6s) var(--gdel,0s) infinite steps(1,end);
+}
+.fxl{position:absolute;inset:0;pointer-events:none;z-index:3;}
+.fxl.noise{width:100%;height:100%;opacity:.13;mix-blend-mode:screen;image-rendering:pixelated;}
+.fxl.scan{background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);}
+.fxl.vig{background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.75) 100%);}
+.fxl.roll{inset:auto 0 auto 0;height:22%;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.07),transparent);animation:fxRoll 5.5s linear infinite;}
+.fxg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;mix-blend-mode:screen;opacity:0;z-index:2;}
+.fxg.r{filter:grayscale(1) sepia(1) hue-rotate(-50deg) saturate(3) contrast(1.2);animation:fxGlitchA var(--gd,6s) var(--gdel,0s) infinite steps(1,end);}
+.fxg.c{filter:grayscale(1) sepia(1) hue-rotate(150deg) saturate(3) contrast(1.2);animation:fxGlitchB var(--gd,6s) var(--gdel,0s) infinite steps(1,end);}
+.noimg .fxg{display:none;}
+@keyframes fxFlicker{0%,100%{opacity:1}47%{opacity:.92}48%{opacity:.78}49%{opacity:1}}
+@keyframes fxRoll{from{top:-25%}to{top:110%}}
+@keyframes fxShake{0%,86%,100%{transform:none}88%{transform:translate(-3px,1px)}91%{transform:translate(4px,-1px)}94%{transform:translate(-2px,0)}}
+@keyframes fxGlitchA{0%,86%,100%{opacity:0;transform:none;clip-path:inset(0)}87%{opacity:.5;transform:translateX(-7px);clip-path:inset(18% 0 62% 0)}90%{opacity:.5;transform:translateX(6px);clip-path:inset(55% 0 20% 0)}93%{opacity:.4;transform:translateX(-4px);clip-path:inset(38% 0 35% 0)}96%{opacity:0}}
+@keyframes fxGlitchB{0%,86%,100%{opacity:0;transform:none;clip-path:inset(0)}88%{opacity:.5;transform:translateX(7px);clip-path:inset(62% 0 18% 0)}91%{opacity:.5;transform:translateX(-6px);clip-path:inset(15% 0 60% 0)}94%{opacity:.4;transform:translateX(4px);clip-path:inset(42% 0 33% 0)}96%{opacity:0}}
+@media(prefers-reduced-motion:reduce){
+  .cctv img:not(.fxg),.fx img:not(.fxg),.fxg,.fxl.roll{animation:none;}
+  .fxg{display:none;}
+}
+.panel .fxl{z-index:2;}
