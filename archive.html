@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARCHIVE · CODE NULL</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html">프롤로그</a>
+  <a href="world.html">세계관</a>
+  <a href="characters.html">캐릭터</a>
+</nav>
+
+<div id="gate" class="gate">
+  <div class="tag">RESTRICTED ARCHIVE</div>
+  <h1>비공개 기록 보관소</h1>
+  <p class="dim" style="margin-top:.8rem;max-width:26rem;">접근 권한이 있는 경우에만 열람 가능합니다.</p>
+  <input id="pw" type="password" placeholder="PASSWORD" autocomplete="off">
+  <button onclick="tryUnlock()">접속</button>
+  <div class="err" id="err"></div>
+</div>
+
+<div id="cctv-wrap" class="cctv-wrap">
+  <section class="wrap" style="padding:3rem 6vw 1rem;">
+    <div class="tag">RESTRICTED ARCHIVE — UNLOCKED</div>
+    <h1>CCTV 기록 · 탈출 당일</h1>
+    <p class="dim" style="margin-top:.6rem;">복구된 단편 영상입니다. 음성·화질 손실이 있습니다.</p>
+  </section>
+
+  <section class="cctv">
+    <img src="img/60.png" alt="">
+    <div class="ph">img/60.png</div>
+    <div class="hud">
+      <div class="rec"><span class="dot"></span>REC</div>
+      <div class="cam">CAM 03 — B2 복도</div>
+      <div class="ts">02:17:44</div>
+    </div>
+  </section>
+
+  <section class="cctv">
+    <img src="img/61.png" alt="">
+    <div class="ph">img/61.png</div>
+    <div class="hud">
+      <div class="rec"><span class="dot"></span>REC</div>
+      <div class="cam">CAM 07 — 격리동 출입구</div>
+      <div class="ts">02:19:02</div>
+    </div>
+  </section>
+
+  <section class="cctv">
+    <img src="img/62.png" alt="">
+    <div class="ph">img/62.png</div>
+    <div class="hud">
+      <div class="rec"><span class="dot"></span>REC</div>
+      <div class="cam">CAM 11 — 비상계단</div>
+      <div class="ts">02:21:58</div>
+    </div>
+  </section>
+
+  <section class="cctv">
+    <img src="img/63.png" alt="">
+    <div class="ph">img/63.png</div>
+    <div class="hud">
+      <div class="rec"><span class="dot"></span>REC</div>
+      <div class="cam">CAM 14 — 외곽 펜스</div>
+      <div class="ts">02:24:10</div>
+    </div>
+  </section>
+
+  <section class="cctv">
+    <img src="img/64.png" alt="">
+    <div class="ph">img/64.png</div>
+    <div class="hud">
+      <div class="rec"><span class="dot"></span>REC</div>
+      <div class="cam">CAM 14 — 외곽 펜스</div>
+      <div class="ts">02:24:47</div>
+    </div>
+  </section>
+
+  <section class="cctv">
+    <img src="img/65.png" alt="">
+    <div class="ph">img/65.png</div>
+    <div class="hud">
+      <div class="rec"><span class="dot"></span>REC</div>
+      <div class="cam">CAM 14 — 외곽 펜스</div>
+      <div class="ts">02:25:03</div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding:2.5rem 6vw;">
+    <p class="dim" style="font-size:.78rem;">※ 이 영상의 존재 자체가 기밀입니다. 외부 유출 시 처벌 대상이 됩니다. — [기록 끝]</p>
+    <a class="back" href="index.html">← 돌아가기</a>
+  </section>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+  // 임시 비밀번호 — README 참고. 실제 서비스에서는 서버 검증으로 교체 권장.
+  var ARCHIVE_PW = "HELLO";
+  function tryUnlock(){
+    var val = document.getElementById('pw').value.trim();
+    if (val.toUpperCase() === ARCHIVE_PW) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('cctv-wrap').classList.add('show');
+    } else {
+      document.getElementById('err').textContent = 'ACCESS DENIED';
+    }
+  }
+  document.getElementById('pw').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') tryUnlock();
+  });
+</script>
+</body>
+</html>
