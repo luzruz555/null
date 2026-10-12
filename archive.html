@@ -5,25 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ARCHIVE · CODE NULL</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/webtoon.css">
 </head>
 <body>
+<!--
+  ─────────────────────────────────────────
+   여기서 찾는 건 소용없다. 열쇠는 소스에 없다.
+   두 개의 숫자는 이야기 속에 있다.
+     ① 서류 위, 한 칸 잘못 적힌 코드
+     ② 새벽, 시계가 가리키던 시각
+   …그리고 검은 여백을 끌어 보면, 보이지 않던 글씨가 있다.
+  ─────────────────────────────────────────
+-->
 <nav class="nav">
   <a href="index.html">프롤로그</a>
   <a href="world.html">세계관</a>
   <a href="characters.html">캐릭터</a>
+  <a href="archive.html" class="active lock">기록</a>
 </nav>
 
-<div id="gate" class="gate">
-  <div class="tag">RESTRICTED ARCHIVE</div>
-  <h1>비공개 기록 보관소</h1>
-  <p class="dim" style="margin-top:.8rem;max-width:26rem;">접근 권한이 있는 경우에만 열람 가능합니다.</p>
-  <input id="pw" type="password" placeholder="PASSWORD" autocomplete="off">
-  <button onclick="tryUnlock()">접속</button>
-  <div class="err" id="err"></div>
-</div>
+<section class="term archive-gate" style="padding-top:12vh;min-height:80vh;">
+  <div class="term-box">
+    <div class="term-head"><span class="dot"></span>RESTRICTED ARCHIVE · LOCKED</div>
+    <div class="term-title">비공개 기록 보관소</div>
+    <p class="term-desc">이 기록은 두 개의 숫자로 잠겨 있습니다.<br>숫자는 이 사이트의 이야기 속에 흩어져 있습니다.</p>
+    <ul class="clues"><li>누군가 잘못 입력한 코드</li><li>문이 열린 시각</li></ul>
+    <p class="more-hint" hidden>프롤로그의 서류와, 첫 번째 밤의 시계를 다시 보세요.</p>
+    <form class="code-gate" data-mode="inline" autocomplete="off">
+      <input type="text" placeholder="XXX-XXXX" maxlength="12" aria-label="접근 코드" spellcheck="false">
+      <button type="submit">접속</button>
+      <div class="msg" aria-live="polite"></div>
+    </form>
+    <a class="term-link" href="index.html">프롤로그로 돌아가기</a>
+  </div>
+</section>
 
-<div id="cctv-wrap" class="cctv-wrap">
-  <section class="wrap" style="padding:3rem 6vw 1rem;">
+<div class="archive-gated">
+  <section class="wrap" style="padding:3rem 6vw 1rem;max-width:720px;">
     <div class="tag">RESTRICTED ARCHIVE — UNLOCKED</div>
     <h1>CCTV 기록 · 탈출 당일</h1>
     <p class="dim" style="margin-top:.6rem;">복구된 단편 영상입니다. 음성·화질 손실이 있습니다.</p>
@@ -38,7 +56,6 @@
       <div class="ts">02:17:44</div>
     </div>
   </section>
-
   <section class="cctv">
     <img src="img/61.png" alt="">
     <div class="ph">img/61.png</div>
@@ -48,7 +65,6 @@
       <div class="ts">02:19:02</div>
     </div>
   </section>
-
   <section class="cctv">
     <img src="img/62.png" alt="">
     <div class="ph">img/62.png</div>
@@ -58,7 +74,6 @@
       <div class="ts">02:21:58</div>
     </div>
   </section>
-
   <section class="cctv">
     <img src="img/63.png" alt="">
     <div class="ph">img/63.png</div>
@@ -68,7 +83,6 @@
       <div class="ts">02:24:10</div>
     </div>
   </section>
-
   <section class="cctv">
     <img src="img/64.png" alt="">
     <div class="ph">img/64.png</div>
@@ -78,7 +92,6 @@
       <div class="ts">02:24:47</div>
     </div>
   </section>
-
   <section class="cctv">
     <img src="img/65.png" alt="">
     <div class="ph">img/65.png</div>
@@ -89,28 +102,13 @@
     </div>
   </section>
 
-  <section class="wrap" style="padding:2.5rem 6vw;">
+  <section class="wrap" style="padding:2.5rem 6vw;max-width:720px;">
     <p class="dim" style="font-size:.78rem;">※ 이 영상의 존재 자체가 기밀입니다. 외부 유출 시 처벌 대상이 됩니다. — [기록 끝]</p>
     <a class="back" href="index.html">← 돌아가기</a>
+    <a class="back" href="#" data-lock style="margin-left:1.2rem;">기록 다시 잠그기</a>
   </section>
 </div>
 
 <script src="js/main.js"></script>
-<script>
-  // 임시 비밀번호 — README 참고. 실제 서비스에서는 서버 검증으로 교체 권장.
-  var ARCHIVE_PW = "HELLO";
-  function tryUnlock(){
-    var val = document.getElementById('pw').value.trim();
-    if (val.toUpperCase() === ARCHIVE_PW) {
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('cctv-wrap').classList.add('show');
-    } else {
-      document.getElementById('err').textContent = 'ACCESS DENIED';
-    }
-  }
-  document.getElementById('pw').addEventListener('keydown', function(e){
-    if (e.key === 'Enter') tryUnlock();
-  });
-</script>
 </body>
 </html>

@@ -221,3 +221,59 @@ p.dim{color:var(--dim);font-size:.92rem;}
   .fxg{display:none;}
 }
 .panel .fxl{z-index:2;}
+
+/* ===== 자리표시: 이미지가 정말 없을 때만 보이기 ===== */
+.ph{display:none !important;}
+.noimg > .ph{display:flex !important;}
+.wiki-hero .ph{align-items:center;justify-content:center;color:var(--dim);font-size:.75rem;
+  background:repeating-linear-gradient(135deg,#0b0d13 0 12px,#0e111a 12px 24px);}
+
+/* ===== 상단 탭: 기록 보관소 ===== */
+.nav a.lock{color:#ff6b7c;}
+.nav a.lock::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#ff4d5e;margin-right:.45em;vertical-align:middle;animation:blink 1.4s infinite;}
+.archive-open .nav a.lock{color:var(--dim);}
+.archive-open .nav a.lock::before{background:#7fa8e0;animation:none;}
+
+/* ===== 접근 터미널 ===== */
+.term{max-width:720px;margin:0 auto;padding:0 6vw 4rem;}
+.term-box{border:1px solid rgba(255,77,94,.55);background:linear-gradient(180deg,rgba(255,77,94,.08),rgba(5,6,10,.6) 40%);
+  padding:1.4rem 1.3rem 1.3rem;position:relative;overflow:hidden;}
+.term-box::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px);}
+.term-head{display:flex;align-items:center;gap:.55rem;font-family:'Archivo Black',sans-serif;font-size:.72rem;letter-spacing:.18em;color:#ff6b7c;}
+.term-head .dot{width:8px;height:8px;border-radius:50%;background:#ff4d5e;animation:blink 1s infinite;}
+.term-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(1.3rem,4.6vw,1.8rem);margin:.8rem 0 .4rem;color:#fff;}
+.term-desc{color:#a7afc0;font-size:.9rem;line-height:1.7;margin-bottom:1rem;}
+.clues{list-style:none;margin:0 0 1.1rem;padding:0;color:#c9cfdb;font-size:.88rem;line-height:1.9;}
+.clues li::before{content:"▸ ";color:#ff6b7c;}
+.more-hint{color:#7fa8e0;font-size:.82rem;margin:-.4rem 0 1rem;}
+
+form.code-gate{display:flex;flex-wrap:wrap;gap:.6rem;}
+form.code-gate input{flex:1 1 180px;min-width:0;background:#05060a;border:1px solid rgba(255,255,255,.25);color:#fff;
+  font-family:'Archivo Black',monospace;letter-spacing:.25em;font-size:1rem;padding:.85rem 1rem;text-transform:uppercase;}
+form.code-gate input:focus{outline:none;border-color:#ff6b7c;box-shadow:0 0 0 3px rgba(255,77,94,.2);}
+form.code-gate button{background:#ff4d5e;color:#05060a;border:none;cursor:pointer;font-family:'Archivo Black',sans-serif;
+  font-size:.78rem;letter-spacing:.15em;padding:.85rem 1.4rem;}
+form.code-gate button:hover{background:#ff7383;}
+form.code-gate .msg{flex-basis:100%;min-height:1.3em;font-family:'Archivo Black',monospace;font-size:.75rem;letter-spacing:.1em;color:#ff6b7c;}
+form.code-gate.ok .msg{color:#7fe0b0;}
+form.code-gate.ok input{border-color:#7fe0b0;}
+form.code-gate.bad input{animation:shake .35s;}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.term-link{display:inline-block;margin-top:1rem;color:var(--dim);font-size:.8rem;letter-spacing:.08em;}
+.term.granted .term-box{border-color:rgba(127,224,176,.5);}
+
+/* 열람 상태 전환 */
+.archive-gated{display:none;}
+.archive-open .archive-gated{display:block;}
+.archive-open .archive-gate{display:none;}
+
+/* 정답 순간 화면 글리치 */
+.glitch-flash{animation:flash .9s steps(2,end);}
+@keyframes flash{0%{filter:none}15%{filter:invert(1) hue-rotate(160deg)}30%{filter:none;transform:translateX(4px)}45%{filter:contrast(2) saturate(0)}60%{transform:translateX(-4px)}100%{filter:none;transform:none}}
+
+/* 드래그해야 보이는 숨은 글씨 (ARG 단서) */
+.hid{color:#000;background:#000;user-select:text;}
+.hid::selection{color:#ff6b7c;background:#1a1d26;}
+
+@media(prefers-reduced-motion:reduce){.glitch-flash,form.code-gate.bad input,.nav a.lock::before,.term-head .dot{animation:none;}}

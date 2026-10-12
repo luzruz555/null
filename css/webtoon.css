@@ -133,3 +133,21 @@
 @media(min-width:768px){
   .strip{border-left:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08);}
 }
+
+/* ===== 스크롤 등장 애니메이션 ===== */
+.reveal-on .strip .cut:not(.static),
+.reveal-on .strip .gut,
+.reveal-on .strip .strip-end{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);}
+.reveal-on .strip .cut.in,
+.reveal-on .strip .gut.in,
+.reveal-on .strip .strip-end.in{opacity:1;transform:none;}
+.reveal-on .strip .cut > img{transition:filter 1.2s ease;}
+.reveal-on .strip .cut:not(.in) > img{filter:brightness(.35) blur(2px);}
+.reveal-on .strip .cut.mono:not(.in) > img{filter:grayscale(1) brightness(.35) blur(2px);}
+/* 말풍선·내레이션은 컷이 뜬 뒤 하나씩 (--i: 컷 안에서의 순서) */
+.reveal-on .strip .cut .o{opacity:0;scale:.92;transition:opacity .45s ease,scale .45s cubic-bezier(.3,1.6,.5,1);}
+.reveal-on .strip .cut.in .o{opacity:1;scale:1;transition-delay:calc(.35s + var(--i,0) * .5s);}
+.reveal-on .strip .cut.in .sfx{animation:sfxPop .5s calc(.3s + var(--i,0) * .5s) both;}
+@keyframes sfxPop{0%{opacity:0;scale:1.6}60%{opacity:1;scale:.95}100%{opacity:1;scale:1}}
+.reveal-on .strip .cut.inset{transform:translateY(28px) scale(.97);}
+.reveal-on .strip .cut.inset.in{transform:none;}
